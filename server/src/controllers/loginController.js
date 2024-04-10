@@ -25,7 +25,6 @@ const login = (req, res) => {
             const name = dataUser.nombre;
             const lastName = dataUser.apellido;
 
-            console.log({ nombre: name, apellido: lastName });
             if (error) {
               return res.status(500).json({ message: "error", error: error });
             }
@@ -40,7 +39,7 @@ const login = (req, res) => {
                   },
                 },
                 "Stack",
-                { expiresIn: "3m" }
+                { expiresIn: "10m" }
               );
               return res.status(201).json({
                 message: "correctCredentials",
