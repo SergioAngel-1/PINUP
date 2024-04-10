@@ -2,7 +2,7 @@
 
 ## Overview
 
-PINUP is the integrative project developed by the team of 5 members as part of the requirements for the completion of our studies at Universidad San Buenaventura. PINUP aims to provide a comprehensive solution for [specific purpose or problem statement here].
+PINUP is the integrative project developed by the team of 5 members as part of the requirements for the completion of our studies at the San Buenaventura University. PINUP aims to provide a comprehensive solution for the virtualization of the PINUP dance academy located in the city of Medellín, facilitating the management of its users, classes, students, teachers among other utilities.
 
 ## Features
 
@@ -22,7 +22,7 @@ PINUP is the integrative project developed by the team of 5 members as part of t
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/pinup.git
+   git clone https://github.com/SergioAngel-1/PINUP.git
 
 2. Navigate to the project directory:
     ```bash
