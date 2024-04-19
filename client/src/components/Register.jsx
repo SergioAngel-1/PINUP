@@ -18,11 +18,11 @@ const Register = () => {
     const errorAlert = errorSpanRef.current;
 
     if (
-      !formValues.email &&
-      !formValues.password &&
-      !formValues.confirmPassword &&
-      !formValues.name &&
-      !formValues.lastName
+      formValues.email &&
+      formValues.password &&
+      formValues.confirmPassword &&
+      formValues.name &&
+      formValues.lastName
     ) {
       if (!formValues.acceptedTerms) {
         if (!formValues.password === !formValues.confirmPassword) {

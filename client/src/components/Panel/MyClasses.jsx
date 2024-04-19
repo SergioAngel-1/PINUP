@@ -285,7 +285,7 @@ const MyClasses = () => {
                           />
                           <FaMoneyBillAlt
                             className="cursor-not-allowed text-green-300 text-3xl"
-                            title="Esta clase ya se encuentra paga."
+                            title="Esta clase ya se en proceso de pago."
                           />
                         </td>
                       )}
