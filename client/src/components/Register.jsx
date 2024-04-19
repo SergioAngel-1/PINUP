@@ -15,17 +15,17 @@ const Register = () => {
     const formData = new FormData(refForm.current);
     const formValues = Object.fromEntries(formData.entries());
 
-    const email = formValues.email;
-    const name = formValues.name;
-    const lastName = formValues.lastName;
-    const password = formValues.password;
-    const confirmPassword = formValues.confirmPassword;
-    const acceptedTerms = refTerms.current.checked;
     const errorAlert = errorSpanRef.current;
 
-    if ((email, password, confirmPassword, name, lastName)) {
-      if (acceptedTerms) {
-        if (password == confirmPassword) {
+    if (
+      !formValues.email &&
+      !formValues.password &&
+      !formValues.confirmPassword &&
+      !formValues.name &&
+      !formValues.lastName
+    ) {
+      if (!formValues.acceptedTerms) {
+        if (!formValues.password === !formValues.confirmPassword) {
           errorAlert.innerText = null;
           setEstadoBoton("Creando cuenta");
           setBotonDeshabilitado(true);
@@ -59,7 +59,7 @@ const Register = () => {
                   setBotonDeshabilitado(true);
                   setTimeout(() => {
                     navigate("/login");
-                  }, 3000);
+                  }, 1500);
                   break;
                 default:
                   break;
@@ -139,7 +139,7 @@ const Register = () => {
                   htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Tu correo
+                  Correo electrónico
                 </label>
                 <input
                   type="email"

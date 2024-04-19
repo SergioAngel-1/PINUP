@@ -1,26 +1,12 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { FaTimesCircle } from "react-icons/fa";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { RiAccountPinCircleFill } from "react-icons/ri";
+import { parseJwt } from "./globalFunctions/parseJwt.js";
 
-function parseJwt(token) {
-  var base64Url = token.split(".")[1];
-  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-  var jsonPayload = decodeURIComponent(
-    window
-      .atob(base64)
-      .split("")
-      .map(function (c) {
-        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-      })
-      .join("")
-  );
-
-  return JSON.parse(jsonPayload);
-}
-
-const Nav = () => {
+const Nav = ({ showLogo = true }) => {
   let tokenValid = false;
   let fullName = "";
   if (localStorage.getItem("token")) {
@@ -45,7 +31,11 @@ const Nav = () => {
     <header>
       <nav className="h-10vh flex justify-between items-center z-50 text-white lg:py-5 px-10 py-4 relative">
         <Link to="/">
-          <img src="../logo2.png" alt="Logo" className="h-20" />
+          {showLogo ? (
+            <Link to="/">
+              <img src="../logo2.png" alt="Logo" className="h-20" />
+            </Link>
+          ) : null}
         </Link>
         <div className="flex items-center">
           {!tokenValid ? (
@@ -103,6 +93,10 @@ const Nav = () => {
       </nav>
     </header>
   );
+};
+
+Nav.propTypes = {
+  showLogo: PropTypes.bool,
 };
 
 export default Nav;

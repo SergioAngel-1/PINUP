@@ -64,7 +64,7 @@ const Login = () => {
 
                 setTimeout(() => {
                   navigate("/");
-                }, 3000);
+                }, 1500);
               } else {
                 errorAlert.innerText =
                   "Ocurrió un error al generar el token de inicio de sesión.";
