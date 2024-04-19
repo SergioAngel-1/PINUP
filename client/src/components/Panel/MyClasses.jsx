@@ -176,7 +176,7 @@ const MyClasses = () => {
       .then((result) => {
         switch (result.message) {
           case "updateClassSuccesfully":
-            linkWhatsApp = `https://wa.me/573004851616&text=Hola%2C%20quiero%20pagar%20la%20clase%20con%20id%20${id_clase}.`;
+            linkWhatsApp = `https://api.whatsapp.com/send?phone=573203180670&text=Hola%2C%20quiero%20pagar%20la%20clase%20con%20id%20${id_clase}.`;
             linkWhatsApp += "%0A";
             linkWhatsApp += `Los datos de la clase son:`;
             linkWhatsApp += "%0A";
@@ -296,7 +296,7 @@ const MyClasses = () => {
             </div>
             <h1 className="text-right text-text font-normal mr-4 hover:underline hover:cursor-pointer">
               <a
-                href="https://wa.me/573004851616?text=Hola,%20quiero%20hablar%20con%20un%20administrador"
+                href="https://api.whatsapp.com/send?phone=573203180670&text=Hola,%20quiero%20hablar%20con%20un%20administrador"
                 target="_blank"
               >
                 Hablar con un administrador.
