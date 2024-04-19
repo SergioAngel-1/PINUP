@@ -15,11 +15,13 @@ export default {
         "roboto-slab": ["Roboto Slab", "sans-serif"],
       },
       backgroundImage: {
-        "form": "url('/map-image.png')",
+        form: "url('/map-image.png')",
       },
-      boxShadow:{
-        'forms': '0px 18px 36px 18px rgba(4, 23, 40, 0.75)',
-      }
+      boxShadow: {
+        forms: "0px 18px 36px 18px rgba(4, 23, 40, 0.75)",
+        panel: "4px 2px 8px 0px rgba(124,0,238,1)",
+        innerBtns: "inset 0 0 5px rgba(2, 15, 26)",
+      },
     },
   },
   plugins: [],

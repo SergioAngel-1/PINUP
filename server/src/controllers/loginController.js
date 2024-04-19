@@ -22,6 +22,8 @@ const login = (req, res) => {
           [email, password],
           (error, result) => {
             const dataUser = result[0];
+            const userId = dataUser.id;
+            const userRol = dataUser.rol;
             const name = dataUser.nombre;
             const lastName = dataUser.apellido;
 
@@ -33,13 +35,15 @@ const login = (req, res) => {
               const token = jwt.sign(
                 {
                   credentials: {
+                    userId: userId,
+                    userRol: userRol,
                     email: email,
                     nombre: name,
                     apellido: lastName,
                   },
                 },
                 "Stack",
-                { expiresIn: "10m" }
+                { expiresIn: "100m" }
               );
               return res.status(201).json({
                 message: "correctCredentials",

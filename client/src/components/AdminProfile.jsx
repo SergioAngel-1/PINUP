@@ -1,36 +1,38 @@
+import ActualizarPerfil from "./Panel/UpdateProfile.jsx";
+import MisClases from "./Panel/MyClasses.jsx";
+import DefaultPanel from "./Panel/DefaultPanel.jsx";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
-
-function parseJwt(token) {
-  var base64Url = token.split(".")[1];
-  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-  var jsonPayload = decodeURIComponent(
-    window
-      .atob(base64)
-      .split("")
-      .map(function (c) {
-        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-      })
-      .join("")
-  );
-
-  return JSON.parse(jsonPayload);
-}
+import { useState } from "react";
+import { parseJwt } from "./globalFunctions/parseJwt.js";
 
 const AdminProfile = () => {
   let tokenValid = false;
+
   if (localStorage.getItem("token")) {
     const dataToken = parseJwt(localStorage.getItem("token"));
     tokenValid = dataToken.exp * 1000 > Date.now();
   }
 
+  const [selectedComponent, setSelectedComponent] = useState(<DefaultPanel />);
+  const [selectedButton, setSelectedButton] = useState(null);
+
+  const buttons = [
+    {
+      label: "Actualizar Perfil",
+      component: <ActualizarPerfil />,
+      key: "actualizarPerfil",
+    },
+    { label: "Mis Clases", component: <MisClases />, key: "misClases" },
+  ];
+
   return (
-    <div className="bg-gradient-to-b from-secondary to-primary h-full pb-16 min-h-screen">
-      <header>
-        <Nav />
-      </header>
+    <div className="bg-gradient-to-b from-secondary to-primary h-full min-h-screen">
       {!tokenValid ? (
         <>
+          <header>
+            <Nav />
+          </header>
           <div className="flex justify-center items-center">
             <div className="w-full rounded-lg md:mt-0 sm:max-w-md xl:py-16 xl:px-8 dark:bg-fourth dark:border-fourth shadow-forms text-center">
               <h2 className="mt-4 text-3xl text-title font-bold mb-8">
@@ -59,7 +61,35 @@ const AdminProfile = () => {
           </div>
         </>
       ) : (
-        <></>
+        <div className="flex h-full min-h-screen overflow-clip">
+          <div className="w-2/12 shadow-panel flex flex-col items-center py-5">
+            <Link to="/">
+              <img src="../logo2.png" alt="Logo" className="h-20" />
+            </Link>
+            <ul className="mt-16 font-medium text-center">
+              {buttons.map((button) => (
+                <li
+                  key={button.key}
+                  onClick={() => {
+                    setSelectedComponent(button.component);
+                    setSelectedButton(button.key);
+                  }}
+                  className={`py-2 px-4 text-fourth rounded-2xl mb-6 border-2 border-fourth transition duration-150 ease-out hover:cursor-pointer ${
+                    selectedButton === button.key
+                      ? "shadow-innerBtns bg-opacity-80"
+                      : "hover:shadow-innerBtns hover:bg-opacity-80 hover:cursor-pointer"
+                  }`}
+                >
+                  {button.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="w-full">
+            <Nav showLogo={false} />
+            <div className="pb-24">{selectedComponent}</div>
+          </div>
+        </div>
       )}
     </div>
   );
