@@ -27,7 +27,7 @@ const getDataClasses = (req, res) => {
                                 INNER JOIN
                             tipo_baile b ON b.id = c.cfg_tipo
                         WHERE
-                          c.id_alumno = 6
+                          c.id_alumno = ?
                               AND c.estado IN ('Pago' , 'Sin pagar', 'Pendiente')`;
 
   try {

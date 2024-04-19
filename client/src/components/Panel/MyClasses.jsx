@@ -294,6 +294,14 @@ const MyClasses = () => {
                 </tbody>
               </table>
             </div>
+            <h1 className="text-right text-text font-normal mr-4 hover:underline hover:cursor-pointer">
+              <a
+                href="https://wa.me/573004851616?text=Hola,%20quiero%20hablar%20con%20un%20administrador"
+                target="_blank"
+              >
+                Hablar con un administrador.
+              </a>
+            </h1>
           </div>
         )}
         {showTable && (
@@ -389,14 +397,6 @@ const MyClasses = () => {
                 </tr>
               </tbody>
             </table>
-            <h1 className="text-right text-text font-normal mr-4 hover:underline hover:cursor-pointer">
-              <a
-                href="https://wa.me/573004851616?text=Hola,%20quiero%20hablar%20con%20un%20administrador"
-                target="_blank"
-              >
-                Hablar con un administrador.
-              </a>
-            </h1>
           </div>
         )}
         <button
