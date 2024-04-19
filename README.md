@@ -28,13 +28,17 @@ PINUP is the integrative project developed by the team of 5 members as part of t
     ```bash
     cd pinup
 
-3. Install dependencies:
+3. Install dependencies client:
    ```bash
+    cd .\client\
     npm install
+    npm run dev
 
-4. Start the development server:
+4. Install dependencies server:
    ```bash
-    npm start
+    cd .\server\
+    npm install
+    node .\src\index.js
 
 ## Contributors
 -  Sergio Jauregui
