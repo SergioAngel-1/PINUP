@@ -294,109 +294,101 @@ const MyClasses = () => {
                 </tbody>
               </table>
             </div>
-            {showTable && (
-              <div className="overflow-hidden border border-gray-200 shadow-md rounded-lg my-6">
-                <table className="w-full">
-                  <thead className="bg-gray-200">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-bold text-fourth uppercase text-center tracking-wider">
-                        Profesor
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-bold text-fourth uppercase text-center tracking-wider">
-                        Baile
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-bold text-fourth uppercase text-center tracking-wider">
-                        Fecha
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-bold text-fourth uppercase text-center tracking-wider">
-                        Precio
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-bold text-fourth uppercase text-center tracking-wider">
-                        Guardar
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    <tr>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-fourth">
-                        <select
-                          name="teacher"
-                          id="teacher"
-                          value={selectedTeacher}
-                          onChange={(e) => setSelectedTeacher(e.target.value)}
-                          className="rounded-md shadow-sm focus:ring-indigo-500 focus:border-fourth text-base text-center p-2 border-2 border-text"
-                          required
-                        >
-                          <option value="" disabled hidden>
-                            Seleccionar
-                          </option>
-                          {Object.entries(teachers).map(([key, teacher]) => (
-                            <option
-                              key={teacher.id}
-                              value={teacher.id}
-                              id={key}
-                            >
-                              {teacher.nombre} {teacher.apellido}
-                            </option>
-                          ))}
-                        </select>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-fourth">
-                        <select
-                          name="baile"
-                          id="baile"
-                          value={selectedDanceTypes}
-                          onChange={(e) =>
-                            setSelectedDanceTypes(e.target.value)
-                          }
-                          className="rounded-md shadow-sm focus:ring-indigo-500 focus:border-fourth text-base text-center p-2 border-2 border-text"
-                          required
-                        >
-                          <option value="" disabled hidden>
-                            Seleccionar
-                          </option>
-                          {danceTypes.map((danceType) => (
-                            <option key={danceType.id} value={danceType.id}>
-                              {danceType.nombre_baile}
-                            </option>
-                          ))}
-                        </select>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-fourth">
-                        <input
-                          className="p-2 border-2 border-text rounded-md focus:border-fourth"
-                          onChange={(e) => setSelectedDate(e.target.value)}
-                          type="date"
-                          min={getCurrentDate()}
-                          required
-                        />
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-fourth font-medium">
-                        {selectedDanceTypes &&
-                        danceTypes[selectedDanceTypes - 1] ? (
-                          <span>
-                            ${danceTypes[selectedDanceTypes - 1].precio}
-                          </span>
-                        ) : (
-                          <span className="text-text italic">
-                            Seleccione un tipo de baile
-                          </span>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div className="flex justify-center">
-                          <LuSave
-                            className="cursor-pointer text-fourth text-2xl"
-                            onClick={() => saveClass()}
-                            title="Guardar"
-                          />
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            )}
+          </div>
+        )}
+        {showTable && (
+          <div className="overflow-hidden border border-gray-200 shadow-md rounded-lg my-6">
+            <table className="w-full">
+              <thead className="bg-gray-200">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-bold text-fourth uppercase text-center tracking-wider">
+                    Profesor
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-bold text-fourth uppercase text-center tracking-wider">
+                    Baile
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-bold text-fourth uppercase text-center tracking-wider">
+                    Fecha
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-bold text-fourth uppercase text-center tracking-wider">
+                    Precio
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-bold text-fourth uppercase text-center tracking-wider">
+                    Guardar
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                <tr>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-fourth">
+                    <select
+                      name="teacher"
+                      id="teacher"
+                      value={selectedTeacher}
+                      onChange={(e) => setSelectedTeacher(e.target.value)}
+                      className="rounded-md shadow-sm focus:ring-indigo-500 focus:border-fourth text-base text-center p-2 border-2 border-text"
+                      required
+                    >
+                      <option value="" disabled hidden>
+                        Seleccionar
+                      </option>
+                      {Object.entries(teachers).map(([key, teacher]) => (
+                        <option key={teacher.id} value={teacher.id} id={key}>
+                          {teacher.nombre} {teacher.apellido}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-fourth">
+                    <select
+                      name="baile"
+                      id="baile"
+                      value={selectedDanceTypes}
+                      onChange={(e) => setSelectedDanceTypes(e.target.value)}
+                      className="rounded-md shadow-sm focus:ring-indigo-500 focus:border-fourth text-base text-center p-2 border-2 border-text"
+                      required
+                    >
+                      <option value="" disabled hidden>
+                        Seleccionar
+                      </option>
+                      {danceTypes.map((danceType) => (
+                        <option key={danceType.id} value={danceType.id}>
+                          {danceType.nombre_baile}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-fourth">
+                    <input
+                      className="p-2 border-2 border-text rounded-md focus:border-fourth"
+                      onChange={(e) => setSelectedDate(e.target.value)}
+                      type="date"
+                      min={getCurrentDate()}
+                      required
+                    />
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-fourth font-medium">
+                    {selectedDanceTypes &&
+                    danceTypes[selectedDanceTypes - 1] ? (
+                      <span>${danceTypes[selectedDanceTypes - 1].precio}</span>
+                    ) : (
+                      <span className="text-text italic">
+                        Seleccione un tipo de baile
+                      </span>
+                    )}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <div className="flex justify-center">
+                      <LuSave
+                        className="cursor-pointer text-fourth text-2xl"
+                        onClick={() => saveClass()}
+                        title="Guardar"
+                      />
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
             <h1 className="text-right text-text font-normal mr-4 hover:underline hover:cursor-pointer">
               <a
                 href="https://wa.me/573004851616?text=Hola,%20quiero%20hablar%20con%20un%20administrador"
