@@ -47,5 +47,8 @@ PINUP is the integrative project developed by the team of 5 members as part of t
 -  Andrés Castro
 -  Duban Monroy
 
+## Video Features 19/04
+[Video YouTube](https://youtu.be/hiIqWdC4BHw)
+
 ## License
 This project is licensed under the MIT License.
