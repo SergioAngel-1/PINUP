@@ -43,7 +43,7 @@ const login = (req, res) => {
                   },
                 },
                 "Stack",
-                { expiresIn: "100m" }
+                { expiresIn: "8m" }
               );
               return res.status(201).json({
                 message: "correctCredentials",

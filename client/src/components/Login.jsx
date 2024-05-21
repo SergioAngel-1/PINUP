@@ -23,7 +23,7 @@ const Login = () => {
       errorAlert.innerText = null;
       setTextoBoton("Iniciando sesión");
       setBotonDeshabilitado(true);
-      fetch("http://localhost:3000/login", {
+      fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

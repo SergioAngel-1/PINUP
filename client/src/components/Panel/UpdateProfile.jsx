@@ -32,7 +32,7 @@ const ActualizarPerfil = () => {
       const dataToken = parseJwt(localStorage.getItem("token"));
       const emailStorage = dataToken.credentials.email;
 
-      fetch("http://localhost:3000/getDataUser", {
+      fetch(`${import.meta.env.VITE_BACKEND_URL}/getDataUser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const ActualizarPerfil = () => {
     errorAlert.innerText = "";
     setBotonDeshabilitado(false);
 
-    fetch("http://localhost:3000/updateData", {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/updateData`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
