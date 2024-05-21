@@ -29,7 +29,7 @@ const Register = () => {
           errorAlert.innerText = null;
           setEstadoBoton("Creando cuenta");
           setBotonDeshabilitado(true);
-          fetch("http://localhost:3000/register", {
+          fetch(`${import.meta.env.VITE_BACKEND_URL}/register`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

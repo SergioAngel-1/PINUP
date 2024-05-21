@@ -42,7 +42,7 @@ const MyClasses = () => {
       const userId = dataToken.credentials.userId;
       const userRol = dataToken.credentials.userRol;
 
-      fetch("http://localhost:3000/getDataClasses", {
+      fetch(`${import.meta.env.VITE_BACKEND_URL}/getDataClasses`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +69,7 @@ const MyClasses = () => {
   }, [dataLoaded]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/getRolUsersClasses", {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/getRolUsersClasses`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +85,7 @@ const MyClasses = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:3000/getTypesDance", {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/getTypesDance`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -112,7 +112,7 @@ const MyClasses = () => {
     };
 
     if (data.userId && data.teacherId && data.danceTypeId && data.date) {
-      fetch("http://localhost:3000/saveNewClass", {
+      fetch(`${import.meta.env.VITE_BACKEND_URL}/saveNewClass`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -138,7 +138,7 @@ const MyClasses = () => {
   };
 
   const removeClass = (id_clase) => {
-    fetch("http://localhost:3000/removeClass", {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/removeClass`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -165,7 +165,7 @@ const MyClasses = () => {
     const id_clase = clase.id_clase;
     let linkWhatsApp = "";
 
-    fetch("http://localhost:3000/payClassWhatsApp", {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/payClassWhatsApp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
