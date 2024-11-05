@@ -5,7 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { HashLink as NavHashLink } from "react-router-hash-link";
 import { useAuthContext } from "./AuthContext";
 import AuthModal from "./AuthModals";
-import { usePWA } from "../hooks/usePWA";
+import { usePWA } from "../hooks/usePWA.tsx";
 import alertify from "alertifyjs";
 
 export default function Header() {
