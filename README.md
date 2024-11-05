@@ -1,54 +1,105 @@
-# PINUP Project
+# PINUP Dance Academy
 
-## Overview
+Una plataforma web moderna para la gestión de una academia de baile urbano, desarrollada con React y tecnologías modernas.
 
-PINUP is the integrative project developed by the team of 5 members as part of the requirements for the completion of our studies at the San Buenaventura University. PINUP aims to provide a comprehensive solution for the virtualization of the PINUP dance academy located in the city of Medellín, facilitating the management of its users, classes, students, teachers among other utilities.
+## 🚀 Características
 
-## Features
+### Para Estudiantes
+- Registro y gestión de cuenta
+- Reserva de clases
+- Seguimiento de progreso
+- Sistema de pagos integrado
+- Visualización de horarios
 
-- **Contact Form:** The project includes a fully functional contact form that sends messages to the project's email address.
-- **User Authentication:** PINUP implements a robust user authentication system with features like login and registration, including various validations.
-- **Session Management:** The system manages user sessions efficiently, including specific session timeouts for enhanced security.
+### Para Profesores
+- Panel de control personalizado
+- Gestión de clases
+- Seguimiento de estudiantes
+- Estadísticas de rendimiento
 
-## Technologies Used
+### Para Administradores
+- Gestión completa de usuarios
+- Análisis de datos
+- Control de pagos
+- Gestión de horarios
 
-- **Frontend:** React.js, JavaScript
-- **Styling:** Tailwind CSS
-- **Backend:** Node.js
-- **Email Integration:** EmailJS
-- **Authentication:** JSON Web Tokens (JWT)
+## 🛠️ Tecnologías Utilizadas
 
-## Installation
+- **Frontend:**
+  - React 18
+  - TypeScript
+  - Tailwind CSS
+  - Framer Motion
+  - Lucide Icons
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/SergioAngel-1/PINUP.git
+- **Estado y Gestión de Datos:**
+  - IndexedDB (idb)
+  - Context API
 
-2. Navigate to the project directory:
-    ```bash
-    cd pinup
+- **Herramientas de Desarrollo:**
+  - Vite
+  - ESLint
+  - TypeScript
 
-3. Install dependencies client:
-   ```bash
-    cd .\client\
-    npm install
-    npm run dev
+## 📦 Instalación
 
-4. Install dependencies server:
-   ```bash
-    cd .\server\
-    npm install
-    node .\src\index.js
+```bash
+# Clonar el repositorio
+git clone https://github.com/tu-usuario/pinup-dance-academy.git
 
-## Contributors
--  Sergio Jauregui
--  Camilo Anzola
--  Andrés Jimenez
--  Andrés Castro
--  Duban Monroy
+# Instalar dependencias
+cd pinup-dance-academy
+npm install
 
-## Video Features 19/04
-[Video YouTube](https://youtu.be/hiIqWdC4BHw)
+# Iniciar servidor de desarrollo
+npm run dev
+```
 
-## License
-This project is licensed under the MIT License.
+## 🔧 Configuración
+
+El proyecto utiliza variables de entorno para configuraciones sensibles. Crea un archivo `.env` en la raíz del proyecto:
+
+```env
+VITE_EMAIL_SERVICE_ID=tu_service_id
+VITE_EMAIL_TEMPLATE_ID=tu_template_id
+VITE_EMAIL_PUBLIC_KEY=tu_public_key
+```
+
+## 🗄️ Estructura del Proyecto
+
+```
+src/
+├── components/        # Componentes reutilizables
+├── lib/              # Utilidades y configuraciones
+├── pages/            # Componentes de página
+├── types/            # Definiciones de TypeScript
+└── main.tsx          # Punto de entrada
+```
+
+## 🔐 Seguridad
+
+- Autenticación de usuarios
+- Encriptación de contraseñas
+- Protección de rutas
+- Validación de datos
+
+## 🎨 Diseño
+
+- Interfaz moderna y responsiva
+- Animaciones fluidas
+- Tema oscuro por defecto
+- Componentes accesibles
+
+## 📱 Compatibilidad
+
+- Navegadores modernos
+- Diseño responsive
+- PWA ready
+
+## 🤝 Contribución
+
+Este proyecto es privado y no acepta contribuciones externas.
+
+## 📄 Licencia
+
+Ver el archivo [LICENSE](LICENSE) para detalles.

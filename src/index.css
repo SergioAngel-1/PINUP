@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-black;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-purple-900 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-purple-800;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Alertify customization */
+.alertify-notifier {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  top: auto !important;
+}
+
+.alertify-notifier .ajs-message {
+  @apply bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg shadow-lg border-none !important;
+  padding: 12px 24px !important;
+  font-family: inherit !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  opacity: 0;
+  transform: translateX(100%);
+  animation: slideIn 0.3s ease forwards, fadeOut 0.3s ease 2.7s forwards !important;
+}
+
+.alertify-notifier .ajs-message.ajs-success {
+  @apply bg-gradient-to-r from-green-600 to-teal-600 !important;
+}
+
+.alertify-notifier .ajs-message.ajs-error {
+  @apply bg-gradient-to-r from-red-600 to-pink-600 !important;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* Modal scrollbar */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thumb-purple-500\/20::-webkit-scrollbar-thumb {
+  background-color: rgba(168, 85, 247, 0.2);
+}
+
+.scrollbar-track-transparent::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Modal centering fix */
+.fixed.inset-0.flex.items-center.justify-center {
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 100vh;
+  padding: 1rem;
+  box-sizing: border-box;
+}
