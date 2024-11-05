@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X, LogIn, UserPlus, User, LogOut } from "lucide-react";
+import { Menu, X, LogIn, UserPlus, User, LogOut, Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { HashLink as NavHashLink } from "react-router-hash-link";
 import { useAuthContext } from "./AuthContext";
 import AuthModal from "./AuthModals";
+import { usePWA } from "../hooks/usePWA";
 import alertify from "alertifyjs";
 
 export default function Header() {
@@ -13,6 +14,7 @@ export default function Header() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const { user, logout } = useAuthContext();
+  const { isInstallable, installApp } = usePWA();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -79,6 +81,16 @@ export default function Header() {
               >
                 Contacto
               </NavHashLink>
+
+              {isInstallable && (
+                <button
+                  onClick={installApp}
+                  className="flex items-center space-x-2 text-purple-400 hover:text-purple-300 transition"
+                >
+                  <Download size={18} />
+                  <span>Instalar App</span>
+                </button>
+              )}
 
               {user ? (
                 <div className="flex items-center space-x-4">
@@ -173,6 +185,18 @@ export default function Header() {
                     >
                       Contacto
                     </NavHashLink>
+                    {isInstallable && (
+                      <button
+                        onClick={() => {
+                          installApp();
+                          handleMenuItemClick();
+                        }}
+                        className="flex items-center space-x-2 text-purple-400 hover:text-purple-300 py-2 transition-colors"
+                      >
+                        <Download size={18} />
+                        <span>Instalar App</span>
+                      </button>
+                    )}
                   </div>
 
                   <div className="p-4 border-t border-purple-500/20">
