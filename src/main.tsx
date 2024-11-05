@@ -18,9 +18,6 @@ const updateSW = registerSW({
       updateSW(true);
     }
   },
-  onOfflineReady() {
-    alertify.success("App lista para uso sin conexión");
-  },
   immediate: true,
 });
 

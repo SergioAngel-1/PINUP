@@ -11,7 +11,7 @@ export default defineConfig({
       manifest: {
         name: "PINUP Dance Academy",
         short_name: "PINUP Dance",
-        description: "Academia de baile urbano en Medellín",
+        description: "Academia de baile urbano",
         theme_color: "#000000",
         background_color: "#000000",
         display: "standalone",
@@ -20,32 +20,32 @@ export default defineConfig({
         orientation: "portrait",
         icons: [
           {
-            src: "logo2.png",
+            src: "pwa/logo192x192.jpeg",
             sizes: "192x192",
             type: "image/png",
-            purpose: "any"
+            purpose: "any",
           },
           {
-            src: "logo2.png",
+            src: "pwa/logo512x512.jpeg",
             sizes: "512x512",
             type: "image/png",
-            purpose: "any"
+            purpose: "any",
           },
           {
-            src: "logo2.png",
+            src: "pwa/logo512x512.jpeg",
             sizes: "512x512",
             type: "image/png",
-            purpose: "maskable"
-          }
+            purpose: "maskable",
+          },
         ],
         categories: ["education", "fitness"],
         shortcuts: [
           {
             name: "Dashboard",
             url: "/dashboard",
-            description: "Access your dashboard"
-          }
-        ]
+            description: "Access your dashboard",
+          },
+        ],
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
@@ -57,12 +57,12 @@ export default defineConfig({
               cacheName: "google-fonts-cache",
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365
+                maxAgeSeconds: 60 * 60 * 24 * 365,
               },
               cacheableResponse: {
-                statuses: [0, 200]
-              }
-            }
+                statuses: [0, 200],
+              },
+            },
           },
           {
             urlPattern: /^https:\/\/images\.unsplash\.com\/.*/i,
@@ -71,22 +71,22 @@ export default defineConfig({
               cacheName: "unsplash-image-cache",
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 30
+                maxAgeSeconds: 60 * 60 * 24 * 30,
               },
               cacheableResponse: {
-                statuses: [0, 200]
-              }
-            }
-          }
+                statuses: [0, 200],
+              },
+            },
+          },
         ],
         cleanupOutdatedCaches: true,
         skipWaiting: true,
-        clientsClaim: true
+        clientsClaim: true,
       },
       devOptions: {
         enabled: true,
-        type: 'module'
-      }
-    })
-  ]
+        type: "module",
+      },
+    }),
+  ],
 });

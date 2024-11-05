@@ -151,7 +151,7 @@ export default function Header() {
                 animate={{ opacity: 1, height: "calc(100vh - 72px)" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.3 }}
-                className="fixed inset-x-0 top-[72px] md:hidden bg-black/80 backdrop-blur-md"
+                className="fixed inset-x-0 md:hidden bg-black/80 backdrop-blur-md"
               >
                 <div className="flex flex-col h-full">
                   <div className="flex-1 px-4 py-6 space-y-4">
@@ -221,7 +221,7 @@ export default function Header() {
                           <LogOut size={18} />
                           <span>Salir</span>
                         </button>
-                        <div className="text-center text-sm text-gray-500 mt-4 pt-4 border-t border-purple-500/10">
+                        <div className="text-center text-sm text-gray-500 mt-4 pt-8 border-t border-purple-500/10">
                           © {new Date().getFullYear()} PINUP Dance Academy.
                           Todos los derechos reservados.
                         </div>
@@ -250,7 +250,7 @@ export default function Header() {
                           <UserPlus size={18} />
                           <span>Registrarse</span>
                         </button>
-                        <div className="text-center text-sm text-gray-500 mt-4 pt-4 border-t border-purple-500/10">
+                        <div className="text-center text-sm text-gray-500 mt-4 pt-8 border-t border-purple-500/10">
                           © {new Date().getFullYear()} PINUP Dance Academy.
                           Todos los derechos reservados.
                         </div>

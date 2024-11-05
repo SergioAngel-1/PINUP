@@ -4,12 +4,16 @@ export function usePWA() {
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
   const [isInstallable, setIsInstallable] = useState(false);
+  const [isIOS, setIsIOS] = useState(false);
 
   useEffect(() => {
+    // Check if running on iOS
+    const isIOSDevice =
+      /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    setIsIOS(isIOSDevice);
+
     const handler = (e: Event) => {
-      // Prevent the mini-infobar from appearing on mobile
       e.preventDefault();
-      // Store the event for later use
       setDeferredPrompt(e as BeforeInstallPromptEvent);
       setIsInstallable(true);
     };
@@ -48,5 +52,5 @@ export function usePWA() {
     setDeferredPrompt(null);
   };
 
-  return { isInstallable, installApp };
+  return { isInstallable, installApp, isIOS };
 }

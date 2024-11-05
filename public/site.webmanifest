@@ -1,7 +1,7 @@
 {
   "name": "PINUP Dance Academy",
   "short_name": "PINUP Dance",
-  "description": "Academia de baile urbano en Medellín",
+  "description": "Academia de baile urbano",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",

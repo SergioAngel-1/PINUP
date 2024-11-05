@@ -99,7 +99,7 @@ export default function DashboardLayout({
               <div className="p-6">
                 <div className="flex items-center justify-between mb-8">
                   <Link to="/" className="flex items-center space-x-2">
-                    <img src="/favicon.svg" alt="PINUP" className="w-8 h-8" />
+                    <img src="/logo2.png" alt="PINUP" className="w-auto h-8" />
                     <span
                       className="text-2xl font-bold bg-gradient-to-r from-purple-500 
                     via-pink-500 to-green-400 text-transparent bg-clip-text"
