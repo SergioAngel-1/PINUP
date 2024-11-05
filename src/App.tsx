@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import Dashboard from "./pages/Dashboard";
+import PWAInstallPrompt from "./components/pwa/PWAInstallPrompt";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
             }
           />
         </Routes>
+        <PWAInstallPrompt />
       </div>
     </AuthProvider>
   );

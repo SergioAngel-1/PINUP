@@ -11,16 +11,17 @@ import { registerSW } from "virtual:pwa-register";
 alertify.set("notifier", "position", "bottom-right");
 alertify.set("notifier", "delay", 3);
 
-// Register Service Worker
+// Register Service Worker with auto-update
 const updateSW = registerSW({
   onNeedRefresh() {
-    if (confirm("New content available. Reload?")) {
+    if (confirm("Nueva versión disponible. ¿Actualizar ahora?")) {
       updateSW(true);
     }
   },
   onOfflineReady() {
-    alertify.success("App ready for offline use");
+    alertify.success("App lista para uso sin conexión");
   },
+  immediate: true,
 });
 
 // Initialize database before rendering

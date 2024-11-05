@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: "prompt",
-      includeAssets: ["favicon.svg"],
+      registerType: "autoUpdate",
+      includeAssets: ["favicon.svg", "apple-touch-icon.png", "masked-icon.svg"],
       manifest: {
         name: "PINUP Dance Academy",
         short_name: "PINUP Dance",
@@ -15,6 +15,9 @@ export default defineConfig({
         theme_color: "#000000",
         background_color: "#000000",
         display: "standalone",
+        scope: "/",
+        start_url: "/",
+        orientation: "portrait",
         icons: [
           {
             src: "logo2.png",
@@ -33,6 +36,9 @@ export default defineConfig({
             purpose: "any maskable",
           },
         ],
+      },
+      devOptions: {
+        enabled: true,
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
