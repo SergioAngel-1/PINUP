@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: "autoUpdate",
+      registerType: "prompt",
       includeAssets: ["favicon.svg", "apple-touch-icon.png", "masked-icon.svg"],
       manifest: {
         name: "PINUP Dance Academy",
@@ -23,22 +23,29 @@ export default defineConfig({
             src: "logo2.png",
             sizes: "192x192",
             type: "image/png",
+            purpose: "any"
           },
           {
             src: "logo2.png",
             sizes: "512x512",
             type: "image/png",
+            purpose: "any"
           },
           {
             src: "logo2.png",
             sizes: "512x512",
             type: "image/png",
-            purpose: "any maskable",
-          },
+            purpose: "maskable"
+          }
         ],
-      },
-      devOptions: {
-        enabled: true,
+        categories: ["education", "fitness"],
+        shortcuts: [
+          {
+            name: "Dashboard",
+            url: "/dashboard",
+            description: "Access your dashboard"
+          }
+        ]
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
@@ -50,12 +57,12 @@ export default defineConfig({
               cacheName: "google-fonts-cache",
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
+                maxAgeSeconds: 60 * 60 * 24 * 365
               },
               cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
+                statuses: [0, 200]
+              }
+            }
           },
           {
             urlPattern: /^https:\/\/images\.unsplash\.com\/.*/i,
@@ -64,15 +71,22 @@ export default defineConfig({
               cacheName: "unsplash-image-cache",
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+                maxAgeSeconds: 60 * 60 * 24 * 30
               },
               cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
+                statuses: [0, 200]
+              }
+            }
+          }
         ],
+        cleanupOutdatedCaches: true,
+        skipWaiting: true,
+        clientsClaim: true
       },
-    }),
-  ],
+      devOptions: {
+        enabled: true,
+        type: 'module'
+      }
+    })
+  ]
 });

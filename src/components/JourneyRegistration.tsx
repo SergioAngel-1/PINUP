@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   X,
@@ -47,6 +47,35 @@ export default function JourneyRegistration({ isOpen, onClose }: Props) {
   const [loading, setLoading] = useState(false);
   const { register } = useAuthContext();
   const navigate = useNavigate();
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener("keydown", handleEscape);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [isOpen, onClose]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -102,18 +131,13 @@ export default function JourneyRegistration({ isOpen, onClose }: Props) {
     }
   };
 
-  const renderStep = () => {
+  const renderStepContent = () => {
     switch (step) {
       case 1:
         return (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-white mb-6">
-              Información Personal
-            </h2>
             <div>
-              <label className="block text-gray-200 mb-2">
-                Nombre completo
-              </label>
+              <label className="block text-gray-200 mb-2">Nombre</label>
               <div className="relative">
                 <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-purple-400" />
                 <input
@@ -123,11 +147,12 @@ export default function JourneyRegistration({ isOpen, onClose }: Props) {
                   onChange={handleChange}
                   className="w-full bg-purple-900/20 border border-purple-500/30 rounded-lg py-3 px-10
                   text-white focus:outline-none focus:border-purple-500 transition"
-                  placeholder="Tu nombre"
+                  placeholder="Tu nombre completo"
                   required
                 />
               </div>
             </div>
+
             <div>
               <label className="block text-gray-200 mb-2">Email</label>
               <div className="relative">
@@ -144,6 +169,7 @@ export default function JourneyRegistration({ isOpen, onClose }: Props) {
                 />
               </div>
             </div>
+
             <div>
               <label className="block text-gray-200 mb-2">Contraseña</label>
               <div className="relative">
@@ -160,9 +186,10 @@ export default function JourneyRegistration({ isOpen, onClose }: Props) {
                 />
               </div>
             </div>
+
             <div>
               <label className="block text-gray-200 mb-2">
-                Confirmar contraseña
+                Confirmar Contraseña
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-purple-400" />
@@ -180,75 +207,66 @@ export default function JourneyRegistration({ isOpen, onClose }: Props) {
             </div>
           </div>
         );
+
       case 2:
         return (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-white mb-6">
-              Tu Experiencia
-            </h2>
             <div>
               <label className="block text-gray-200 mb-4">
-                Nivel de experiencia en baile
+                Nivel de Experiencia
               </label>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {["beginner", "intermediate", "advanced"].map((level) => (
+                {["Principiante", "Intermedio", "Avanzado"].map((level) => (
                   <label
                     key={level}
-                    className={`flex items-center justify-center p-4 rounded-lg border cursor-pointer
-                    transition-all ${
-                      formData.experience === level
-                        ? "bg-purple-500/30 border-purple-500"
-                        : "bg-purple-900/20 border-purple-500/30 hover:border-purple-500/60"
+                    className={`flex items-center justify-center p-4 rounded-lg border 
+                    transition-colors cursor-pointer ${
+                      formData.experience === level.toLowerCase()
+                        ? "border-purple-500 bg-purple-500/20"
+                        : "border-purple-500/30 bg-purple-900/20 hover:border-purple-500/50"
                     }`}
                   >
                     <input
                       type="radio"
                       name="experience"
-                      value={level}
-                      checked={formData.experience === level}
+                      value={level.toLowerCase()}
+                      checked={formData.experience === level.toLowerCase()}
                       onChange={handleChange}
                       className="hidden"
                     />
                     <div className="text-center">
                       <Star
                         className={`w-6 h-6 mx-auto mb-2 ${
-                          formData.experience === level
+                          formData.experience === level.toLowerCase()
                             ? "text-purple-400"
                             : "text-gray-400"
                         }`}
                       />
-                      <span className="text-white capitalize">
-                        {level === "beginner"
-                          ? "Principiante"
-                          : level === "intermediate"
-                          ? "Intermedio"
-                          : "Avanzado"}
-                      </span>
+                      <span className="text-white">{level}</span>
                     </div>
                   </label>
                 ))}
               </div>
             </div>
-          </div>
-        );
-      case 3:
-        return (
-          <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-white mb-6">Preferencias</h2>
+
             <div>
               <label className="block text-gray-200 mb-4">
-                <Clock className="inline-block w-5 h-5 mr-2 text-purple-400" />
-                Horarios preferidos
+                Horarios Preferidos
               </label>
-              <div className="grid grid-cols-2 gap-4">
-                {["Mañana", "Tarde", "Noche", "Fines de semana"].map((time) => (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  "Mañana (7AM - 12PM)",
+                  "Tarde (12PM - 5PM)",
+                  "Noche (5PM - 9PM)",
+                  "Fines de semana",
+                ].map((time) => (
                   <label
                     key={time}
-                    className={`flex items-center p-3 rounded-lg border cursor-pointer
-                    transition-all ${
+                    className={`flex items-center p-4 rounded-lg border transition-colors 
+                    cursor-pointer ${
                       formData.schedule.includes(time)
-                        ? "bg-purple-500/30 border-purple-500"
-                        : "bg-purple-900/20 border-purple-500/30 hover:border-purple-500/60"
+                        ? "border-purple-500 bg-purple-500/20"
+                        : "border-purple-500/30 bg-purple-900/20 hover:border-purple-500/50"
                     }`}
                   >
                     <input
@@ -258,32 +276,46 @@ export default function JourneyRegistration({ isOpen, onClose }: Props) {
                       onChange={(e) => handleCheckboxChange(e, "schedule")}
                       className="hidden"
                     />
-                    <span className="text-white">{time}</span>
+                    <div className="flex items-center space-x-3">
+                      <Clock
+                        className={`w-5 h-5 ${
+                          formData.schedule.includes(time)
+                            ? "text-purple-400"
+                            : "text-gray-400"
+                        }`}
+                      />
+                      <span className="text-white">{time}</span>
+                    </div>
                   </label>
                 ))}
               </div>
             </div>
+          </div>
+        );
+
+      case 3:
+        return (
+          <div className="space-y-6">
             <div>
               <label className="block text-gray-200 mb-4">
-                <Music className="inline-block w-5 h-5 mr-2 text-purple-400" />
-                Estilos de baile que te interesan
+                Estilos de Baile
               </label>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
                   "Hip Hop",
                   "Break Dance",
-                  "House",
                   "Popping",
+                  "House",
                   "Locking",
                   "Dancehall",
                 ].map((style) => (
                   <label
                     key={style}
-                    className={`flex items-center p-3 rounded-lg border cursor-pointer
-                    transition-all ${
+                    className={`flex items-center p-4 rounded-lg border transition-colors 
+                    cursor-pointer ${
                       formData.interests.includes(style)
-                        ? "bg-purple-500/30 border-purple-500"
-                        : "bg-purple-900/20 border-purple-500/30 hover:border-purple-500/60"
+                        ? "border-purple-500 bg-purple-500/20"
+                        : "border-purple-500/30 bg-purple-900/20 hover:border-purple-500/50"
                     }`}
                   >
                     <input
@@ -293,13 +325,23 @@ export default function JourneyRegistration({ isOpen, onClose }: Props) {
                       onChange={(e) => handleCheckboxChange(e, "interests")}
                       className="hidden"
                     />
-                    <span className="text-white">{style}</span>
+                    <div className="flex items-center space-x-3">
+                      <Music
+                        className={`w-5 h-5 ${
+                          formData.interests.includes(style)
+                            ? "text-purple-400"
+                            : "text-gray-400"
+                        }`}
+                      />
+                      <span className="text-white">{style}</span>
+                    </div>
                   </label>
                 ))}
               </div>
             </div>
           </div>
         );
+
       default:
         return null;
     }
@@ -317,15 +359,16 @@ export default function JourneyRegistration({ isOpen, onClose }: Props) {
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
           />
 
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <motion.div
+              ref={modalRef}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               className="w-full max-w-xl bg-gradient-to-b from-purple-900/90 to-black/95 
               backdrop-blur-lg rounded-2xl p-6 md:p-8 shadow-xl border border-purple-500/20 
               max-h-[90vh] overflow-y-auto scrollbar-thin scrollbar-thumb-purple-500/20 
-              scrollbar-track-transparent my-auto relative"
+              scrollbar-track-transparent my-auto"
             >
               <button
                 onClick={onClose}
@@ -357,37 +400,29 @@ export default function JourneyRegistration({ isOpen, onClose }: Props) {
               </div>
 
               <form onSubmit={handleSubmit}>
-                {renderStep()}
+                {renderStepContent()}
 
-                <div className="flex justify-between mt-8">
+                <div className="flex items-center justify-between mt-8">
                   {step > 1 && (
                     <button
                       type="button"
                       onClick={handleBack}
                       className="flex items-center space-x-2 text-gray-400 hover:text-white transition"
                     >
-                      <ArrowLeft className="w-5 h-5" />
+                      <ArrowLeft size={20} />
                       <span>Anterior</span>
                     </button>
                   )}
                   <button
                     type="submit"
                     disabled={loading}
-                    className="ml-auto bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 
-                    rounded-lg flex items-center space-x-2 hover:from-purple-700 hover:to-pink-700 
-                    transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed 
-                    disabled:transform-none"
+                    className="flex items-center space-x-2 bg-gradient-to-r from-purple-600 
+                    to-pink-600 text-white px-6 py-2 rounded-full ml-auto hover:from-purple-700 
+                    hover:to-pink-700 transition transform hover:scale-105 disabled:opacity-50 
+                    disabled:cursor-not-allowed disabled:transform-none"
                   >
-                    {loading ? (
-                      <span className="animate-spin">⏳</span>
-                    ) : (
-                      <>
-                        <span>
-                          {step === 3 ? "Completar registro" : "Siguiente"}
-                        </span>
-                        <ArrowRight className="w-5 h-5" />
-                      </>
-                    )}
+                    <span>{step === 3 ? "Completar" : "Siguiente"}</span>
+                    <ArrowRight size={20} />
                   </button>
                 </div>
               </form>

@@ -64,11 +64,11 @@ export default function UserManagement() {
   }
 
   return (
-    <div className="p-6 md:p-8">
+    <div className="p-4 md:p-6 lg:p-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-b from-purple-900/20 to-black/40 rounded-xl p-6 
+        className="bg-gradient-to-b from-purple-900/20 to-black/40 rounded-xl p-4 md:p-6 
         border border-purple-500/20"
       >
         <h2 className="text-xl font-semibold text-white mb-6">Gestión de Usuarios</h2>
@@ -77,8 +77,8 @@ export default function UserManagement() {
           {users.map((user) => (
             <div
               key={user.id}
-              className="flex items-center justify-between p-4 bg-purple-900/20 rounded-lg 
-              border border-purple-500/10"
+              className="flex flex-col md:flex-row md:items-center justify-between p-4 
+              bg-purple-900/20 rounded-lg border border-purple-500/10 space-y-4 md:space-y-0"
             >
               <div className="flex items-center space-x-4">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 
@@ -95,7 +95,7 @@ export default function UserManagement() {
                 <div className="flex items-center space-x-2">
                   <Shield className="w-4 h-4 text-purple-400" />
                   {selectedUser === user.id ? (
-                    <div className="flex items-center space-x-2">
+                    <div className="flex flex-wrap items-center gap-2">
                       <select
                         value={selectedRole}
                         onChange={(e) => setSelectedRole(e.target.value as UserType['role'])}
@@ -106,21 +106,25 @@ export default function UserManagement() {
                         <option value="teacher">Profesor</option>
                         <option value="admin">Administrador</option>
                       </select>
-                      <button
-                        onClick={() => {
-                          handleRoleChange(user.id!, selectedRole);
-                          setSelectedUser(null);
-                        }}
-                        className="text-green-400 hover:text-green-300 transition"
-                      >
-                        <Check className="w-5 h-5" />
-                      </button>
-                      <button
-                        onClick={() => setSelectedUser(null)}
-                        className="text-red-400 hover:text-red-300 transition"
-                      >
-                        <X className="w-5 h-5" />
-                      </button>
+                      <div className="flex items-center space-x-2">
+                        <button
+                          onClick={() => {
+                            handleRoleChange(user.id!, selectedRole);
+                            setSelectedUser(null);
+                          }}
+                          className="text-green-400 hover:text-green-300 transition p-1 
+                          bg-green-500/10 rounded-full"
+                        >
+                          <Check className="w-5 h-5" />
+                        </button>
+                        <button
+                          onClick={() => setSelectedUser(null)}
+                          className="text-red-400 hover:text-red-300 transition p-1 
+                          bg-red-500/10 rounded-full"
+                        >
+                          <X className="w-5 h-5" />
+                        </button>
+                      </div>
                     </div>
                   ) : (
                     <button
@@ -128,7 +132,8 @@ export default function UserManagement() {
                         setSelectedUser(user.id!);
                         setSelectedRole(user.role);
                       }}
-                      className="px-3 py-1 text-sm text-gray-300 hover:text-white transition"
+                      className="px-3 py-1 text-sm text-gray-300 hover:text-white transition 
+                      bg-purple-500/10 rounded-full"
                     >
                       {user.role === 'admin' ? 'Administrador' :
                        user.role === 'teacher' ? 'Profesor' :
@@ -138,7 +143,8 @@ export default function UserManagement() {
                 </div>
                 <button
                   onClick={() => handleDeleteUser(user.id!)}
-                  className="text-red-400 hover:text-red-300 transition p-1"
+                  className="text-red-400 hover:text-red-300 transition p-1 
+                  bg-red-500/10 rounded-full"
                   title="Eliminar usuario"
                 >
                   <Trash2 className="w-5 h-5" />

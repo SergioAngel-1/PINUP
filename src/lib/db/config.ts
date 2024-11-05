@@ -24,7 +24,6 @@ interface PinupDB extends DBSchema {
   };
 }
 
-// Initial data
 const initialAdmin: User = {
   id: 1,
   email: 'admin@pinup.co',
@@ -46,20 +45,13 @@ const initialTeacher: User = {
 };
 
 let db: IDBPDatabase<PinupDB> | null = null;
+let dbPromise: Promise<IDBPDatabase<PinupDB>> | null = null;
 
 export async function initDB(): Promise<IDBPDatabase<PinupDB>> {
-  if (db) return db;
+  if (dbPromise) return dbPromise;
 
-  // Delete the existing database if it exists
-  try {
-    await deleteDB();
-  } catch (error) {
-    console.warn('No existing database to delete');
-  }
-
-  db = await openDB<PinupDB>('pinup-db', 10, {
+  dbPromise = openDB<PinupDB>('pinup-db', 10, {
     upgrade(db, oldVersion, newVersion, transaction) {
-      // Create stores only if they don't exist
       if (!db.objectStoreNames.contains('users')) {
         const userStore = db.createObjectStore('users', { 
           keyPath: 'id', 
@@ -81,7 +73,6 @@ export async function initDB(): Promise<IDBPDatabase<PinupDB>> {
         classStore.createIndex('payment_status', 'payment_status');
       }
 
-      // Add initial data only if users store is empty
       const userStore = transaction.objectStore('users');
       userStore.count().then(count => {
         if (count === 0) {
@@ -90,19 +81,23 @@ export async function initDB(): Promise<IDBPDatabase<PinupDB>> {
         }
       });
     },
-    blocked() {
+    blocked(currentVersion, blockedVersion, event) {
       console.warn('Database blocked. Please close other tabs of this app.');
     },
-    blocking() {
-      console.warn('New version available. Please reload.');
+    blocking(currentVersion, blockedVersion, event) {
+      db?.close();
+      dbPromise = null;
+      db = null;
       window.location.reload();
     },
     terminated() {
       console.error('Database connection terminated.');
+      dbPromise = null;
       db = null;
     }
   });
 
+  db = await dbPromise;
   return db;
 }
 
@@ -113,10 +108,14 @@ export function getDB(): IDBPDatabase<PinupDB> {
   return db;
 }
 
-async function deleteDB(): Promise<void> {
+export async function closeDB(): Promise<void> {
   if (db) {
     db.close();
     db = null;
+    dbPromise = null;
   }
-  await indexedDB.deleteDatabase('pinup-db');
 }
+
+window.addEventListener('unload', () => {
+  closeDB();
+});
