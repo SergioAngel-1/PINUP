@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { HashLink as NavHashLink } from "react-router-hash-link";
 import { useAuthContext } from "./AuthContext";
+import { usePWA } from "../hooks/usePWA";
 import AuthModal from "./AuthModals";
-import { usePWA } from "../hooks/usePWA.tsx";
 import alertify from "alertifyjs";
 
 export default function Header() {
@@ -221,31 +221,39 @@ export default function Header() {
                           <LogOut size={18} />
                           <span>Salir</span>
                         </button>
+                        <div className="text-center text-sm text-gray-500 mt-4 pt-4 border-t border-purple-500/10">
+                          © {new Date().getFullYear()} PINUP Dance Academy.
+                          Todos los derechos reservados.
+                        </div>
                       </div>
                     ) : (
-                      <div className="flex space-x-3">
+                      <div className="space-y-3">
                         <button
                           onClick={() => {
                             setShowLoginModal(true);
                             handleMenuItemClick();
                           }}
-                          className="flex-1 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 
+                          className="w-full bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 
                           rounded-full flex items-center justify-center space-x-2 transition"
                         >
                           <LogIn size={18} />
-                          <span>Iniciar</span>
+                          <span>Iniciar Sesión</span>
                         </button>
                         <button
                           onClick={() => {
                             setShowRegisterModal(true);
                             handleMenuItemClick();
                           }}
-                          className="flex-1 bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 
+                          className="w-full bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 
                           rounded-full flex items-center justify-center space-x-2 transition"
                         >
                           <UserPlus size={18} />
-                          <span>Registro</span>
+                          <span>Registrarse</span>
                         </button>
+                        <div className="text-center text-sm text-gray-500 mt-4 pt-4 border-t border-purple-500/10">
+                          © {new Date().getFullYear()} PINUP Dance Academy.
+                          Todos los derechos reservados.
+                        </div>
                       </div>
                     )}
                   </div>
