@@ -1,11 +1,12 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './components/AuthContext';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import Blog from './pages/Blog';
-import Dashboard from './pages/Dashboard';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./components/AuthContext";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Blog from "./pages/Blog";
+import Dashboard from "./pages/Dashboard";
+import PWAInstallPrompt from "./components/PWAInstallPrompt";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
             }
           />
         </Routes>
+        <PWAInstallPrompt />
       </div>
     </AuthProvider>
   );
