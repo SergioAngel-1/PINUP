@@ -107,11 +107,6 @@ export default function AdminDashboard() {
                 <div className="p-2 bg-purple-500/20 rounded-lg">
                   <stat.icon className="w-6 h-6 text-purple-400" />
                 </div>
-                <span className={`text-sm ${
-                  stat.positive ? 'text-green-400' : 'text-red-400'
-                }`}>
-                  {stat.change}
-                </span>
               </div>
               <h3 className="text-gray-400 text-sm mb-1">{stat.label}</h3>
               <p className="text-2xl font-bold text-white">{stat.value}</p>
